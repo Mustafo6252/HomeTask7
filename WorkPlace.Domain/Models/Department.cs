@@ -9,6 +9,6 @@ public class Department
     public int CompanyId { get; set; }
 
     // Navigation properties
-    public Company Company { get; set; } = default!;
-    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    // public Company Company { get; set; } = default!;
+    // public ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

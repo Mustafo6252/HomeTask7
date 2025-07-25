@@ -12,7 +12,7 @@ public class EmployeeService : IEmployeeService
     private const string connectionString =
         "Host=localhost;Port=5432;Database=Practice_db;Username=postgres;Password=1111";
 
-    public async Task<ActionResult<Employee>> AddEmployeeAsync(Employee employee)
+    public async Task<Employee> AddEmployeeAsync(Employee employee)
     {
         using var connection = new NpgsqlConnection(connectionString);
         var insertSql =
@@ -24,7 +24,7 @@ public class EmployeeService : IEmployeeService
         return (employee);
     }
 
-    public async Task<ActionResult<List<Employee>>> GetAllEmployeesAsync()
+    public async Task<List<Employee>> GetAllEmployeesAsync()
     {
         using var connection = new NpgsqlConnection(connectionString);
         var selectSql = "SELECT * FROM Employee";
@@ -32,7 +32,7 @@ public class EmployeeService : IEmployeeService
         return (employee.ToList());
     }
 
-    public async Task<ActionResult<Employee>> UpdateEmployeeAsync(int id, Employee employee)
+    public async Task<Employee> UpdateEmployeeAsync(int id, Employee employee)
     {
         using var connection = new NpgsqlConnection(connectionString);
         var updateSql =
@@ -49,7 +49,7 @@ public class EmployeeService : IEmployeeService
         return (employee);
     }
 
-    public async Task<ActionResult<Employee>> DeleteEmployeeAsync(int id)
+    public async Task<Employee> DeleteEmployeeAsync(int id)
     {
         using var connection = new NpgsqlConnection(connectionString);
         var deleteSql = "DELETE FROM Employee WHERE id=@id";

@@ -14,7 +14,7 @@ public class BranchService: IBranchService
     private const string connectionString =
         "Host=localhost;Port=5432;Database=Practice_db;Username=postgres;Password=1111";
 
-    public async Task<ActionResult<Branch>> AddBranchAsync(Branch branch)
+    public async Task<Branch> AddBranchAsync(Branch branch)
     {
         using var connection = new NpgsqlConnection(connectionString);
         var insertSql =
@@ -26,7 +26,7 @@ public class BranchService: IBranchService
         return (branch);
     }
 
-    public async Task<ActionResult<List<Branch>>> GetAllBranchesAsync()
+    public async Task<List<Branch>> GetAllBranchesAsync()
     {
         using var connection=new NpgsqlConnection(connectionString);
         var selectSql="Select * from Branch";
@@ -34,7 +34,7 @@ public class BranchService: IBranchService
         return branches.ToList();
     }
 
-    public async Task<ActionResult<Branch>> UpdateBranchAsync(int id, Branch branch)
+    public async Task<Branch> UpdateBranchAsync(int id, Branch branch)
     {
         using var connection=new NpgsqlConnection(connectionString);
         var updateSql =
@@ -47,7 +47,7 @@ public class BranchService: IBranchService
         return (branch);
     }
 
-    public async Task<ActionResult<Branch>> DeleteBranchAsync(int id)
+    public async Task<Branch> DeleteBranchAsync(int id)
     {   
         using var connection=new NpgsqlConnection(connectionString);
         var deleteSql = "Delete from Branch where id=@id";

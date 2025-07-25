@@ -9,9 +9,9 @@ public class Employee
 
     public int BranchId { get; set; }
     public int DepartmentId { get; set; }
-    public Department Department { get; set; } = default!;
-    
-    
-    
-    public Branch Branch { get; set; } = default!;
+    // public Department Department { get; set; } = default!;
+    //
+    //
+    //
+    // public Branch Branch { get; set; } = default!;
 }

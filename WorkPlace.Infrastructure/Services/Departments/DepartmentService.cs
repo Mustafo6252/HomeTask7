@@ -12,7 +12,7 @@ public class DepartmentService: IDepartmentService
     private const string connectionString =
         "Host=localhost;Port=5432;Database=Practice_db;Username=postgres;Password=1111";
     
-    public async Task<ActionResult<Department>> AddDepartmentAsync(Department department)
+    public async Task<Department> AddDepartmentAsync(Department department)
     {
         using var connection=new NpgsqlConnection(connectionString);
         var insertSql =
@@ -24,7 +24,7 @@ public class DepartmentService: IDepartmentService
         return (department);
     }
 
-    public async Task<ActionResult<List<Department>>> GetAllDepartmentAsync()
+    public async Task<List<Department>> GetAllDepartmentAsync()
     {
         using var connection = new NpgsqlConnection(connectionString);
         var selectSql = "SELECT * FROM Department";
@@ -32,7 +32,7 @@ public class DepartmentService: IDepartmentService
         return (departments.ToList());
     }
 
-    public async Task<ActionResult<Department>> UpdateDepartmentAsync(int id, Department department)
+    public async Task<Department> UpdateDepartmentAsync(int id, Department department)
     {
         using var connection=new NpgsqlConnection(connectionString);
         var updateSql =
@@ -45,7 +45,7 @@ public class DepartmentService: IDepartmentService
         return (department);
     }
 
-    public async Task<ActionResult<Department>> DeleteDepartmentAsync(int id)
+    public async Task<Department> DeleteDepartmentAsync(int id)
     {
         using var connection = new NpgsqlConnection(connectionString);
         var deleteSql = "DELETE FROM Department WHERE id=@id";
