@@ -19,29 +19,58 @@ namespace WorkPlace.Api.Controllers
             this.dbconnection = new NpgsqlConnection(connectionString);
         }
 
-        [HttpGet("one-to-one")]
-        public async Task<ActionResult<IEnumerable<Company>>> GetAllCompaniesWithBranch()
+        [HttpGet("withBranch")]
+        public async Task<ActionResult<List<Company>>> GetAllCompaniesWithBranch()
         {
+            var BranchDictionary=new Dictionary<int, Company>();
             string SqlQuery =
                 """
                 Select * from Company c  
                 Join Branch b ON c.id = b.companyId
                 """;
-            IEnumerable<Company> companies = await dbconnection.QueryAsync<Company,Branch,Company>(SqlQuery,
+            var companies = await dbconnection.QueryAsync<Company,Branch,Company>(SqlQuery,
                 (Company,Branch)=>
             {
-                if (Company.Branches == null)
+                if (!BranchDictionary.TryGetValue(Branch.Id, out var inputCompany))
+                {
+                    inputCompany = Company;
                     Company.Branches = new List<Branch>();
+                    BranchDictionary[Company.Id] = inputCompany;
+                }
 
                 Company.Branches.Add(Branch);
                 return Company;
             });
-            return Ok(companies);
+            return Ok(BranchDictionary.Values.ToList());
+        }
+        
+        [HttpGet("withDepartment")]
+        public async Task<ActionResult<IEnumerable<Department>>> GetAllCompaniesWithDepartment()
+        {
+            var DepartmentDictionary=new Dictionary<int, Department>();
+            string SqlQuery =
+                """
+                Select * from Company c  
+                Join Department d ON c.id = d.companyId
+                """;
+            IEnumerable<Company> companies = await dbconnection.QueryAsync<Company,Department,Company>(SqlQuery,
+                (Company,Department)=>
+                {
+                    if (DepartmentDictionary.TryGetValue(Department.Id, out var inputDepartment))
+                    {
+                        inputDepartment = Department;
+                        Company.Departments = new List<Department>();
+                        DepartmentDictionary[Department.Id] = inputDepartment;
+                    };
+                    Company.Departments.Add(Department);
+                    return Company;
+                });
+            return Ok(DepartmentDictionary.Values.ToList());
         }
 
         
         [HttpGet("one-to-many")]
-        public async Task<ActionResult<List<Company>>> GetAllCompanies()
+        public async Task<ActionResult<List<Company>>> GetAllCompaniesWithBranchWithEmployee()
         {
             var companyDictionary = new Dictionary<int, Company>();
 
