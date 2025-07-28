@@ -1,4 +1,25 @@
 # HomeTask 7
+Fayllarga o'zgartirish kiritildi
+## 1. GetCompanyWithBranchesWithEmployees
+📎 **Rasm:** 
+
+<img width="600" height="900" alt="Screenshot 2025-07-28 at 11 52 03" src="https://github.com/user-attachments/assets/27def6a9-76aa-4e79-86af-bf2fe6b30cbf" />
+
+## 2. GetBranchWithEmployee
+📎 **Rasm:** 
+<img width="600" height="900" alt="Screenshot 2025-07-28 at 11 52 16" src="https://github.com/user-attachments/assets/38f77f49-51a1-4f94-9ed2-8d65871d8a05" />
+
+## 3. GetDepartmentWithEmployee
+📎 **Rasm:** 
+
+<img width="600" height="900" alt="Screenshot 2025-07-28 at 11 52 27" src="https://github.com/user-attachments/assets/a8b5d560-8006-4811-867e-b603004912c3" />
+
+
+
+
+
+
+
 
 # 🏢 CompanyService – REST API Hujjati
 
